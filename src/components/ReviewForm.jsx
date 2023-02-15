@@ -7,7 +7,7 @@ import {
 
 import './ReviewForm.css'
 
-const ReviewForm = () => {
+const ReviewForm = ({data, updateFieldHandler}) => {
   return (
     <div className="review-form">
       <div className="form-control score-container">
@@ -17,6 +17,8 @@ const ReviewForm = () => {
             value='unsatisfied'
             name="review"
             required
+            checked={data.review === "unsatisfied"}
+            onChange={(e) => updateFieldHandler("review", e.target.value)}
           />
           <BsFillEmojiFrownFill />
           <p>Insatisfeito</p>
@@ -27,6 +29,8 @@ const ReviewForm = () => {
             value='neutral'
             name="review"
             required
+            checked={data.review === "neutral"}
+            onChange={(e) => updateFieldHandler("review", e.target.value)}
           />
           <BsFillEmojiNeutralFill />
           <p>Poderia ser melhor</p>
@@ -37,6 +41,8 @@ const ReviewForm = () => {
             value='satisfied'
             name="review"
             required
+            checked={data.review === "satisfied"}
+            onChange={(e) => updateFieldHandler("review", e.target.value)}
           />
           <BsFillEmojiSmileFill />
           <p>Satisfeito</p>
@@ -44,9 +50,11 @@ const ReviewForm = () => {
           <label className="radio-container">
           <input 
             type="radio" 
-            value='Very_satisfied'
+            value='very_satisfied'
             name="review"
             required
+            checked={data.review === "very_satisfied"}
+            onChange={(e) => updateFieldHandler("review", e.target.value)}
           />
           <BsFillEmojiHeartEyesFill />
           <p>Muito satisfeito</p>
@@ -54,7 +62,14 @@ const ReviewForm = () => {
       </div>
       <div className="form-control">
         <label htmlFor="comment">Comentário:</label>
-        <textarea name="comment" id="comment" placeholder="Conte como foi a sua experiência com o produto" required></textarea>
+        <textarea 
+          name="comment" 
+          id="comment" 
+          placeholder="Conte como foi a sua experiência com o produto" 
+          required
+          value={data.comment || ""}
+          onChange={(e) => updateFieldHandler("comment", e.target.value)}  
+        ></textarea>
       </div>
     </div>
   )
